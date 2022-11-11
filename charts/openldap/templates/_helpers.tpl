@@ -114,3 +114,10 @@ Return if ingress supports pathType.
   {{- or (eq (include "openldap.ingress.isStable" .) "true") (and (eq (include
   "openldap.ingress.apiVersion" .) "networking.k8s.io/v1beta1") (semverCompare ">= 1.18-0" .Capabilities.KubeVersion.Version)) -}}
 {{- end -}}
+
+{{/*
+Generate chart secret name
+*/}}
+{{- define "openldap.secretName" -}}
+{{ default (include "openldap.fullname" .) .Values.existingSecret }}
+{{- end -}}
