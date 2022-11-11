@@ -87,20 +87,12 @@ persistence:
   # existingClaim: ""
 
 resources: {}
- # requests:
- #   cpu: "100m"
- #   memory: "256Mi"
- # limits:
- #   cpu: "500m"
- #   memory: "512Mi"
-
-initResources: {}
- # requests:
- #   cpu: "100m"
- #   memory: "128Mi"
- # limits:
- #   cpu: "100m"
- #   memory: "128Mi"
+# requests:
+#   cpu: "100m"
+#   memory: "256Mi"
+# limits:
+#   cpu: "500m"
+#   memory: "512Mi"
 
 nodeSelector: {}
 
