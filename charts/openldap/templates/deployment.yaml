@@ -35,41 +35,6 @@ spec:
         app: {{ template "openldap.name" . }}
         release: {{ .Release.Name }}
     spec:
-      {{- if or .Values.customLdifFiles .Values.tls.enabled }}
-      initContainers:
-      {{- end }}
-      {{- if .Values.customLdifFiles }}
-      - name: {{ .Chart.Name }}-init-ldif
-        image: busybox
-        command: ['sh', '-c', 'cp /customldif/* /ldifworkingdir']
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        volumeMounts:
-          - name: customldif
-            mountPath: /customldif
-          - name: ldifworkingdir
-            mountPath: /ldifworkingdir
-      {{- end }}
-      {{- if .Values.tls.enabled }}
-      - name: {{ .Chart.Name }}-init-tls
-        image: busybox
-        command: ['sh', '-c', 'cp /tls/* /certs']
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        volumeMounts:
-          - name: tls
-            mountPath: /tls
-          - name: certs
-            mountPath: /certs
-      {{- if .Values.tls.CA.enabled }}
-      - name: {{ .Chart.Name }}-init-catls
-        image: busybox
-        command: ['sh', '-c', 'cp /catls/ca.crt /certs']
-        volumeMounts:
-          - name: catls
-            mountPath: /catls
-          - name: certs
-            mountPath: /certs
-      {{- end }}
-      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
