@@ -12,7 +12,8 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      app: {{ template "openldap.name" . }}
+      release: {{ .Release.Name }}
   template:
     metadata:
       annotations:
