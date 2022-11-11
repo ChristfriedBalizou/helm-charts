@@ -44,10 +44,10 @@ spec:
         command: ['sh', '-c', 'cp /customldif/* /ldifworkingdir']
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         volumeMounts:
-        - name: customldif
-          mountPath: /customldif
-        - name: ldifworkingdir
-          mountPath: /ldifworkingdir
+          - name: customldif
+            mountPath: /customldif
+          - name: ldifworkingdir
+            mountPath: /ldifworkingdir
       {{- end }}
       {{- if .Values.tls.enabled }}
       - name: {{ .Chart.Name }}-init-tls
