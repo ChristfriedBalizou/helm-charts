@@ -24,4 +24,3 @@ spec:
   storageClassName: "{{ .Values.persistence.storageClassName }}"
 {{- end }}
 {{- end }}
-{{- end }}
