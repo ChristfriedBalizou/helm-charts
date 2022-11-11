@@ -97,9 +97,9 @@ spec:
               containerPort: 636
           envFrom:
             - configMapRef:
-                name: {{ template "openldap.fullname" . }}-env
+              name: {{ template "openldap.fullname" . }}-env
             - secretRef:
-                name: {{ template "openldap.secretName" . }}
+              name: {{ template "openldap.secretName" . }}
           env:
           {{- if .Values.tls.enabled }}
             - name: LDAP_TLS_CRT_FILENAME
@@ -111,8 +111,9 @@ spec:
               value: ca.crt
           {{- end }}
           {{- end }}
-          {{- with .Values.env }}
-          {{ toYaml . | indent 8 }}
+          {{- range $k, $v := .Values.env }}
+            - name: {{ $k }}
+              value: {{ $v }}
           {{- end }}
           livenessProbe:
             tcpSocket:
