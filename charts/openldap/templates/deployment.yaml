@@ -4,7 +4,10 @@ metadata:
   name:  {{ template "openldap.fullname" . }}
   namespace: {{ template "openldap.namespace" . }}
   labels:
-  {{- include "openldap.labels" . | nindent 2 }}
+    app: {{ template "openldap.name" . }}
+    chart: {{ template "openldap.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
   selector:
     matchLabels:
