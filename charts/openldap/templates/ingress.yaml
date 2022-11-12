@@ -3,7 +3,7 @@
 {{- $ingressSupportsIngressClassName := eq (include "openldap.ingress.supportsIngressClassName" .) "true" -}}
 {{- $ingressSupportsPathType := eq (include "openldap.ingress.supportsPathType" .) "true" -}}
 {{- $fullName := include "openldap.fullname" . -}}
-{{- $servicePort := .Values.service.port -}}
+{{- $servicePort := .Values.service.ldapPort -}}
 {{- $ingressPath := .Values.ingress.path -}}
 {{- $ingressPathType := .Values.ingress.pathType -}}
 {{- $extraPaths := .Values.ingress.extraPaths -}}
@@ -13,10 +13,10 @@ metadata:
   name: {{ $fullName }}
   namespace: {{ template "openldap.namespace" . }}
   labels:
-    {{- include "openldap.labels" . | nindent 4 }}
-{{- if .Values.ingress.labels }}
-{{ toYaml .Values.ingress.labels | indent 4 }}
-{{- end }}
+    {{- include "openldap.labels" . | nindent 2 }}
+    {{- if .Values.extraLabels }}
+    {{ toYaml .Values.extraLabels | indent 2 }}
+    {{- end }}
   {{- if .Values.ingress.annotations }}
   annotations:
     {{- range $key, $value := .Values.ingress.annotations }}
@@ -27,19 +27,19 @@ spec:
   {{- if and $ingressSupportsIngressClassName .Values.ingress.ingressClassName }}
   ingressClassName: {{ .Values.ingress.ingressClassName }}
   {{- end -}}
-{{- if .Values.ingress.tls }}
+  {{- if .Values.ingress.tls }}
   tls:
-{{ tpl (toYaml .Values.ingress.tls) $ | indent 4 }}
-{{- end }}
+  {{ tpl (toYaml .Values.ingress.tls) $ | indent 2 }}
+  {{- end }}
   rules:
-  {{- if .Values.ingress.hosts  }}
-  {{- range .Values.ingress.hosts }}
+    {{- if .Values.ingress.hosts  }}
+    {{- range .Values.ingress.hosts }}
     - host: {{ tpl . $}}
       http:
         paths:
-{{- if $extraPaths }}
-{{ toYaml $extraPaths | indent 10 }}
-{{- end }}
+        {{- if $extraPaths }}
+        {{ toYaml $extraPaths | indent 2 }}
+        {{- end }}
           - path: {{ $ingressPath }}
             {{- if $ingressSupportsPathType }}
             pathType: {{ $ingressPathType }}
@@ -54,8 +54,8 @@ spec:
               serviceName: {{ $fullName }}
               servicePort: {{ $servicePort }}
               {{- end }}
-  {{- end }}
-  {{- else }}
+    {{- end }}
+    {{- else }}
     - http:
         paths:
           - backend:
@@ -74,5 +74,5 @@ spec:
             {{- if $ingressSupportsPathType }}
             pathType: {{ $ingressPathType }}
             {{- end }}
-  {{- end -}}
+    {{- end }}
 {{- end }}

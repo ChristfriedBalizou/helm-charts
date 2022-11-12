@@ -61,22 +61,8 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "openldap.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "openldap.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end -}}
-
-
-{{/*
-Looks if there's an existing secret and reuse its password. If not it generates
-new password and use it.
-*/}}
-{{- define "openldap.password" -}}
-{{- $secret := (lookup "v1" "Secret" (include "openldap.namespace" .) (include "openldap.fullname" .) ) -}}
-  {{- if $secret -}}
-    {{-  index $secret "data" "admin-password" -}}
-  {{- else -}}
-    {{- (randAlphaNum 40) | b64enc | quote -}}
-  {{- end -}}
+app.kubernetes.io/app: {{ include "openldap.name" . }}
+app.kubernetes.io/release: {{ .Release.Name }}
 {{- end -}}
 
 {{/*
