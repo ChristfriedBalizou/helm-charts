@@ -46,12 +46,12 @@ Allow the release namespace to be overridden for multi-namespace deployments in 
 Common labels
 */}}
 {{- define "openldap.labels" -}}
-helm.sh/chart: {{ include "openldap.name" . }}
+chart: {{ include "openldap.name" . }}
 {{ include "openldap.selectorLabels" . }}
 {{- if or .Chart.AppVersion .Values.image.tag }}
-app.kubernetes.io/version: {{ .Values.image.tag | default .Chart.AppVersion | quote }}
+version: {{ .Values.image.tag | default .Chart.AppVersion | quote }}
 {{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
+managed-by: {{ .Release.Service }}
 {{- if .Values.extraLabels }}
 {{ toYaml .Values.extraLabels }}
 {{- end }}
@@ -61,8 +61,8 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "openldap.selectorLabels" -}}
-app.kubernetes.io/app: {{ include "openldap.name" . }}
-app.kubernetes.io/release: {{ .Release.Name }}
+app: {{ include "openldap.name" . }}
+release: {{ .Release.Name }}
 {{- end -}}
 
 {{/*

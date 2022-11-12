@@ -7,10 +7,10 @@ metadata:
   {{- end }}
   name:  {{ template "openldap.fullname" . }}
   labels:
-  {{- include "openldap.labels" . | nindent 2 }}
-  {{- if .Values.extraLabels }}
-  {{ toYaml .Values.extraLabels | indent 2 }}
-  {{- end }}
+    app: {{ template "openldap.name" . }}
+    chart: {{ template "openldap.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
   type: ClusterIP
   ports:
