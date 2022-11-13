@@ -66,6 +66,14 @@ release: {{ .Release.Name }}
 {{- end -}}
 
 {{/*
+Looks if there's an existing secret and reuse its password. If not it generates
+new password and use it.
+*/}}
+{{- define "openldap.password" -}}
+{{- (randAlphaNum 40) | b64enc | quote -}}
+{{- end -}}
+
+{{/*
 Return the appropriate apiVersion for ingress.
 */}}
 {{- define "openldap.ingress.apiVersion" -}}

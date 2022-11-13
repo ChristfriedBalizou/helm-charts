@@ -29,7 +29,7 @@ service:
 # Default Passwords to use, stored as a secret. If unset, passwords are auto-generated.
 # You can override these at install time with
 adminUser: "admin"
-adminPassword: "ChangeMe"
+adminPassword: ""
 
 nodeSelector: {}
 
