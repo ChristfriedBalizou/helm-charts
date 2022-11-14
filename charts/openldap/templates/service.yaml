@@ -14,8 +14,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - name: tcp-ldap
-      port: {{ .Values.service.ldapPort }}
+    - name: ldap
+      port: {{ .Values.service.port }}
       targetPort: tcp-ldap
   selector:
     app: {{ template "openldap.name" . }}

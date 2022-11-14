@@ -37,4 +37,4 @@ spec:
               name: {{ template "openldap.fullname" . }}
         ports:
         - name: tcp-ldap
-          containerPort: {{ .Values.service.ldapPort }}
+          containerPort: {{ .Values.service.port }}
