@@ -13,5 +13,5 @@ sources:
   - https://github.com/ChristfriedBalizou/helm-charts
 maintainers:
   - name: Christfried
-    email: christfriedbalizou@gmail.co
+    email: christfriedbalizou@gmail.com
 engine: gotpl
