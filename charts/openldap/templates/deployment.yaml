@@ -21,20 +21,20 @@ spec:
         release: {{ .Release.Name }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            - name: LDAP_ADMIN_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  key: LDAP_ADMIN_USERNAME
-                  name: {{ template "openldap.fullname" . }}
-            - name: LDAP_ADMIN_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: LDAP_ADMIN_PASSWORD
-                  name: {{ template "openldap.fullname" . }}
-          ports:
-            - name: tcp-ldap
-              containerPort: {{ .Values.service.ldapPort }}
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: LDAP_ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: LDAP_ADMIN_USERNAME
+              name: {{ template "openldap.fullname" . }}
+        - name: LDAP_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: LDAP_ADMIN_PASSWORD
+              name: {{ template "openldap.fullname" . }}
+        ports:
+        - name: tcp-ldap
+          containerPort: {{ .Values.service.ldapPort }}
