@@ -79,3 +79,37 @@ Generate chart secret name
 {{- define "openldap.secretName" -}}
 {{ default (include "openldap.fullname" .) .Values.existingSecret }}
 {{- end -}}
+
+{{/*
+Return the appropriate apiVersion for ingress.
+*/}}
+{{- define "openldap.ingress.apiVersion" -}}
+{{- if and ($.Capabilities.APIVersions.Has "networking.k8s.io/v1") (semverCompare ">= 1.19-0" .Capabilities.KubeVersion.Version) }}
+{{- print "networking.k8s.io/v1" }}
+{{- else if $.Capabilities.APIVersions.Has "networking.k8s.io/v1beta1" }}
+{{- print "networking.k8s.io/v1beta1" }}
+{{- else }}
+{{- print "extensions/v1beta1" }}
+{{- end }}
+{{- end }}
+
+{{/*
+Return if ingress is stable.
+*/}}
+{{- define "openldap.ingress.isStable" -}}
+{{- eq (include "openldap.ingress.apiVersion" .) "networking.k8s.io/v1" }}
+{{- end }}
+
+{{/*
+Return if ingress supports ingressClassName.
+*/}}
+{{- define "openldap.ingress.supportsIngressClassName" -}}
+{{- or (eq (include "openldap.ingress.isStable" .) "true") (and (eq (include "openldap.ingress.apiVersion" .) "networking.k8s.io/v1beta1") (semverCompare ">= 1.18-0" .Capabilities.KubeVersion.Version)) }}
+{{- end }}
+
+{{/*
+Return if ingress supports pathType.
+*/}}
+{{- define "openldap.ingress.supportsPathType" -}}
+{{- or (eq (include "openldap.ingress.isStable" .) "true") (and (eq (include "openldap.ingress.apiVersion" .) "networking.k8s.io/v1beta1") (semverCompare ">= 1.18-0" .Capabilities.KubeVersion.Version)) }}
+{{- end }}
