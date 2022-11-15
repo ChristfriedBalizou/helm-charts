@@ -1,7 +1,7 @@
 apiVersion: v2
 name: openldap
 home: https://www.openldap.org
-version: 0.1.5
+version: 0.1.6
 appVersion: 2.5.13
 kubeVersion: ">=1.16.0-0"
 description: Community developed LDAP software
