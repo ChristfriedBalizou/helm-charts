@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "phpldapadmin.fullname" . }}-LDAP-HOSTS
+  namespace: {{ include "phpldapadmin.namespace" . }}
+  labels:
+    app: {{ template "phpldapadmin.name" . }}
+    chart: {{ template "phpldapadmin.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  PHPLDAPADMIN_LDAP_HOSTS: |
+  {{- with .Values.ldap }}
+  {{- toYaml . | nindent 4 }}
+  {{- end }}

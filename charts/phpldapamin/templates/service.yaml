@@ -14,9 +14,9 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - name: {{ .Values.service.portName }}
-      port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.targetPort }}
+  - name: {{ .Values.service.portName }}
+    port: {{ .Values.service.port }}
+    targetPort: {{ .Values.service.targetPort }}
   selector:
     app: {{ template "phpldapadmin.name" . }}
     release: {{ .Release.Name }}
