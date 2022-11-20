@@ -9,7 +9,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 data:
-  PHPLDAPADMIN_LDAP_HOSTS: |
+  ldap-hosts: |
   PHPLDAPADMIN_LDAP_HOSTS:
     {{- with .Values.ldap }}
     {{- toYaml . | nindent 4 }}
