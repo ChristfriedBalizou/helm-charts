@@ -36,10 +36,11 @@ spec:
         volumeMounts:
         - name: {{ include "phpldapadmin.fullname" . }}-ldap-hosts-volume
           mountPath: /container/environment/98-default
-        {{- if and (.Values.volumes) (.Values.volumes.mountPaths) }}
-        {{- with .Values.volumes.mountPaths }}
-          {{- tpl (toYaml .) $ | nindent 4 }}
-        {{- end }}
+        {{- range .Values.extraConfigmapMounts }}
+        - name: {{ tpl .name $root }}
+          mountPath: {{ tpl .mountPath $root }}
+          subPath: {{ (tpl .subPath $root) | default "" }}
+          readOnly: {{ .readOnly }}
         {{- end }}
         {{- if .Values.resources }}
         resources:
@@ -52,8 +53,12 @@ spec:
           items:
           - key: PHPLDAPADMIN_LDAP_HOSTS
             path: default.yaml
-      {{- if and (.Values.volumes) (.Values.volumes.configMaps) }}
-      {{- with .Values.volumes.configMaps }}
-        {{- tpl (toYaml .) $ | nindent 4 }}
-      {{- end }}
+      {{- range .Values.extraConfigmapMounts }}
+      - name: {{ tpl .name $root }}
+        configMap:
+          name: {{ tpl .configMap $root }}
+          {{- with .items }}
+          items:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
       {{- end }}
