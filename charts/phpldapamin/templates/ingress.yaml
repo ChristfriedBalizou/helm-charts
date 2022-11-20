@@ -1,20 +1,20 @@
 {{- if .Values.ingress.enabled -}}
-{{- $ingressApiIsStable := eq (include "phpldapamin.ingress.isStable" .) "true" -}}
-{{- $ingressSupportsIngressClassName := eq (include "phpldapamin.ingress.supportsIngressClassName" .) "true" -}}
-{{- $ingressSupportsPathType := eq (include "phpldapamin.ingress.supportsPathType" .) "true" -}}
-{{- $fullName := include "phpldapamin.fullname" . -}}
+{{- $ingressApiIsStable := eq (include "phpldapadmin.ingress.isStable" .) "true" -}}
+{{- $ingressSupportsIngressClassName := eq (include "phpldapadmin.ingress.supportsIngressClassName" .) "true" -}}
+{{- $ingressSupportsPathType := eq (include "phpldapadmin.ingress.supportsPathType" .) "true" -}}
+{{- $fullName := include "phpldapadmin.fullname" . -}}
 {{- $servicePort := .Values.service.port -}}
 {{- $ingressPath := .Values.ingress.path -}}
 {{- $ingressPathType := .Values.ingress.pathType -}}
 {{- $extraPaths := .Values.ingress.extraPaths -}}
-apiVersion: {{ include "phpldapamin.ingress.apiVersion" . }}
+apiVersion: {{ include "phpldapadmin.ingress.apiVersion" . }}
 kind: Ingress
 metadata:
   name: {{ $fullName }}
-  namespace: {{ include "phpldapamin.namespace" . }}
+  namespace: {{ include "phpldapadmin.namespace" . }}
   labels:
-    app: {{ template "phpldapamin.name" . }}
-    chart: {{ template "phpldapamin.chart" . }}
+    app: {{ template "phpldapadmin.name" . }}
+    chart: {{ template "phpldapadmin.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
     {{- with .Values.ingress.labels }}
