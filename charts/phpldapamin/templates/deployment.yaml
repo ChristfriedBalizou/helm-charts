@@ -53,7 +53,7 @@ spec:
         configMap:
           name: {{ include "phpldapadmin.fullname" . }}-ldap-hosts
           items:
-          - key: PHPLDAPADMIN_LDAP_HOSTS
+          - key: "ldap-hosts"
             path: default.yaml
       {{- range .Values.extraConfigmapMounts }}
       - name: {{ tpl .name $root }}
