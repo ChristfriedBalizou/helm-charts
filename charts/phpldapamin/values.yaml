@@ -21,6 +21,26 @@ service:
   # https://github.com/osixia/docker-phpLDAPadmin/blob/stable/image/Dockerfile#L46
   targetPort: 80
 
+## Additional mouting point
+# Base on https://github.com/osixia/docker-phpLDAPadmin#set-your-own-environment-variables
+# This configuration should help you mount your own environment on the pod
+# Additional information is volumeMountPath used for volumeMounts.mountPath
+# volumes:
+#   mountPaths:
+#   # List of spec.containers.volumeMounts
+#   # https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#populate-a-volume-with-data-stored-in-a-configmap
+#   - name: config-volume
+#     mountPath: /etc/config
+#   configMaps:
+#   # List of spec.volumes every key supported by
+#   # https://kubernetes.io/docs/concepts/storage/volumes/
+#   - name: config-volume
+#     mountPath:
+#       name: special-config
+#       items:
+#       - key: SPECIAL_LEVEL
+#         path: keys
+
 # -- Container resource [requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#resources) for details.
 # @default -- No requests or limits.
