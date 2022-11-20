@@ -37,6 +37,7 @@ spec:
         volumeMounts:
         - name: {{ include "phpldapadmin.fullname" . }}-ldap-hosts-volume
           mountPath: /container/environment/98-default
+          readOnly: true
         {{- range .Values.extraConfigmapMounts }}
         - name: {{ tpl .name $root }}
           mountPath: {{ tpl .mountPath $root }}
