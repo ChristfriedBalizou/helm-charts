@@ -34,16 +34,16 @@ spec:
         ports:
           - containerPort: {{ .Values.service.port }}
         volumeMounts:
-        - name: {{ include "phpldapadmin.fullname" . }}-LDAP-HOSTS-VOLUME
+        - name: {{ include "phpldapadmin.fullname" . }}-ldap-hosts-volume
           mountPath: /container/environment/98-default
         {{- if .Values.resources }}
         resources:
         {{- toYaml .Values.resources | nindent 12 }}
         {{- end }}
       volumes:
-      - name: {{ include "phpldapadmin.fullname" . }}-LDAP-HOSTS-VOLUME
+      - name: {{ include "phpldapadmin.fullname" . }}-ldap-hosts-volume
         configMap:
-          name: {{ include "phpldapadmin.fullname" . }}-LDAP-HOSTS
+          name: {{ include "phpldapadmin.fullname" . }}-ldap-hosts
           items:
           - key: PHPLDAPADMIN_LDAP_HOSTS
             path: default.yaml
