@@ -48,3 +48,18 @@ spec:
         resources:
         {{- toYaml .Values.resources | nindent 12 }}
         {{- end }}
+        volumeMounts:
+          - name: openldap-data
+            mountPath: /bitnami/openldap
+      volumes:
+      - name: openldap-data
+        {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          {{- if .Values.persistence.existingClaim }}
+          claimName: {{ .Values.persistence.existingClaim }}
+          {{- else }}
+          claimName: {{ include "openldap.fullname" . }}-data
+          {{- end }}
+        {{- else }}
+        emptyDir: {}
+        {{- end }}
