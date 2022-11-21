@@ -50,7 +50,11 @@ spec:
         {{- end }}
         volumeMounts:
           - name: openldap-data
+            {{- if .Values.persistence.mountPath }}
+            mountPath: {{ .Values.persistence.mountPath }}
+            {{- else }}
             mountPath: /bitnami/openldap
+            {{- end }}
       volumes:
       - name: openldap-data
         {{- if .Values.persistence.enabled }}
