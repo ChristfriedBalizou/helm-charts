@@ -3,6 +3,26 @@ entries:
   openldap:
   - apiVersion: v2
     appVersion: 2.6.3
+    created: "2022-11-21T22:58:51.725283314Z"
+    description: Community developed LDAP software
+    digest: 8f8d38894aebb64af33350d3fc292f749a885c16110545d10a18cfc12dea5653
+    home: https://www.openldap.org
+    icon: http://www.openldap.org/images/headers/LDAPworm.gif
+    keywords:
+    - ldap
+    - openldap
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: christfriedbalizou@gmail.com
+      name: Christfried
+    name: openldap
+    sources:
+    - https://github.com/ChristfriedBalizou/helm-charts
+    urls:
+    - https://github.com/ChristfriedBalizou/helm-charts/releases/download/openldap-0.2.3/openldap-0.2.3.tgz
+    version: 0.2.3
+  - apiVersion: v2
+    appVersion: 2.6.3
     created: "2022-11-21T14:41:01.58492782Z"
     description: Community developed LDAP software
     digest: 049061c004b259c65568fe4253ec32b90f76bdb3924824716dcb08d0acf8c0e5
@@ -406,4 +426,4 @@ entries:
     urls:
     - https://github.com/ChristfriedBalizou/helm-charts/releases/download/phpldapadmin-0.0.1/phpldapadmin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-11-21T14:41:01.585288117Z"
+generated: "2022-11-21T22:58:51.725488925Z"
