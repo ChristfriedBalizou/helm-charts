@@ -3,16 +3,10 @@ kind: Deployment
 metadata:
   name:  {{ template "openldap.fullname" . }}
   namespace: {{ template "openldap.namespace" . }}
-  labels:
-    app: {{ template "openldap.name" . }}
-    chart: {{ template "openldap.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+  labels: {{ include "openldap.labels" . | nindent 4 }}
 spec:
   selector:
-    matchLabels:
-      app: {{ template "openldap.name" . }}
-      release: {{ .Release.Name }}
+    matchLabels: {{ include "openldap.selectorLabels" . | nindent 6 }}
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
@@ -24,12 +18,6 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        {{- if .Values.debug.enabled }}
-        command:
-        - tail
-        - "-f"
-        - /dev/null
-        {{- end }}
         env:
         {{- if .Values.env }}
         {{- range $k, $v := .Values.env }}
@@ -55,20 +43,16 @@ spec:
         {{- toYaml .Values.resources | nindent 12 }}
         {{- end }}
         volumeMounts:
-          - name: openldap-data
-            {{- if .Values.persistence.mountPath }}
-            mountPath: {{ .Values.persistence.mountPath }}
-            {{- else }}
+          - name: data
             mountPath: /bitnami/openldap
-            {{- end }}
       volumes:
-      - name: openldap-data
+      - name: data
         {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
           {{- if .Values.persistence.existingClaim }}
           claimName: {{ .Values.persistence.existingClaim }}
           {{- else }}
-          claimName: {{ include "openldap.fullname" . }}-data
+          claimName: {{ include "openldap.fullname" . }}-pvc
           {{- end }}
         {{- else }}
         emptyDir: {}
