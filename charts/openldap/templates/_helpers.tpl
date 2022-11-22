@@ -47,13 +47,16 @@ Common labels
 */}}
 {{- define "openldap.labels" -}}
 chart: {{ include "openldap.name" . }}
+heritage: {{ .Release.Service }}
 {{ include "openldap.selectorLabels" . }}
 {{- if or .Chart.AppVersion .Values.image.tag }}
 version: {{ .Values.image.tag | default .Chart.AppVersion | quote }}
 {{- end }}
-managed-by: {{ .Release.Service }}
 {{- if .Values.extraLabels }}
 {{ toYaml .Values.extraLabels }}
+{{- end }}
+{{- if .Values.persistence.extraPvcLabels }}
+{{ toYaml .Values.persistence.extraPvcLabels }}
 {{- end }}
 {{- end -}}
 

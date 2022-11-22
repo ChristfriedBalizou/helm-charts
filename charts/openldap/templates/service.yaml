@@ -6,17 +6,11 @@ metadata:
   {{ toYaml .Values.service.annotations | indent 2 }}
   {{- end }}
   name:  {{ template "openldap.fullname" . }}
-  labels:
-    app: {{ template "openldap.name" . }}
-    chart: {{ template "openldap.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+  labels: {{ include "openldap.labels" . | nindent 4 }}
 spec:
   type: ClusterIP
   ports:
     - name: ldap
       port: {{ .Values.service.port }}
       targetPort: tcp-ldap
-  selector:
-    app: {{ template "openldap.name" . }}
-    release: {{ .Release.Name }}
+  selector: {{ include "openldap.selectorLabels" . | nindent 4 }}
