@@ -24,6 +24,12 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{- if .Values.debug.enabled }}
+        command:
+        - tail
+        - "-f"
+        - /dev/null
+        {{- end }}
         env:
         {{- if .Values.env }}
         {{- range $k, $v := .Values.env }}
