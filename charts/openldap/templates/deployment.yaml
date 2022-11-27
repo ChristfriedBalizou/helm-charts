@@ -43,8 +43,11 @@ spec:
         {{- toYaml .Values.resources | nindent 12 }}
         {{- end }}
         volumeMounts:
-          - name: data
-            mountPath: /bitnami/openldap
+        - name: data
+          mountPath: /bitnami/openldap
+        {{- with .Values.volumeMounts }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       volumes:
       - name: data
         {{- if .Values.persistence.enabled }}
@@ -57,3 +60,6 @@ spec:
         {{- else }}
         emptyDir: {}
         {{- end }}
+      {{- with .Values.volumes }}
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
