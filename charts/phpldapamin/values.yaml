@@ -21,15 +21,6 @@ service:
   # https://github.com/osixia/docker-phpLDAPadmin/blob/stable/image/Dockerfile#L46
   targetPort: 80
 
-## Additional configmaps to mount in phpldapadmin pods
-# Values are templated.
-extraConfigmapMounts: []
-# - name: certs-configmap
-#   mountPath: /etc/grafana/ssl/
-#   subPath: certificates.crt # (optional)
-#   configMap: certs-configmap
-#   readOnly: true
-
 ## Additional openldap server volume mounts
 # Defines additional volume mounts.
 volumeMounts: []

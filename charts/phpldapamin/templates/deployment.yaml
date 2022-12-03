@@ -38,12 +38,6 @@ spec:
         - name: {{ include "phpldapadmin.fullname" . }}-ldap-hosts-volume
           mountPath: /container/environment/98-default
           readOnly: true
-        {{- range .Values.extraConfigmapMounts }}
-        - name: {{ tpl .name $root }}
-          mountPath: {{ tpl .mountPath $root }}
-          subPath: {{ (tpl .subPath $root) | default "" }}
-          readOnly: {{ .readOnly }}
-        {{- end }}
         {{- with .Values.volumeMounts }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -58,15 +52,6 @@ spec:
           items:
           - key: "ldap-hosts"
             path: default.yaml
-      {{- range .Values.extraConfigmapMounts }}
-      - name: {{ tpl .name $root }}
-        configMap:
-          name: {{ tpl .configMap $root }}
-          {{- with .items }}
-          items:
-            {{- toYaml . | nindent 8 }}
-          {{- end }}
-      {{- end }}
       {{- with .Values.volumes }}
       {{- toYaml . | nindent 6 }}
       {{- end }}
