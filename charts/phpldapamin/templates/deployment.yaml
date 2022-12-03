@@ -44,6 +44,9 @@ spec:
           subPath: {{ (tpl .subPath $root) | default "" }}
           readOnly: {{ .readOnly }}
         {{- end }}
+        {{- with .Values.volumeMounts }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         {{- if .Values.resources }}
         resources:
         {{- toYaml .Values.resources | nindent 12 }}
@@ -63,4 +66,7 @@ spec:
           items:
             {{- toYaml . | nindent 8 }}
           {{- end }}
+      {{- end }}
+      {{- with .Values.volumes }}
+      {{- toYaml . | nindent 6 }}
       {{- end }}

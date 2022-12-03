@@ -30,6 +30,28 @@ extraConfigmapMounts: []
 #   configMap: certs-configmap
 #   readOnly: true
 
+## Additional openldap server volume mounts
+# Defines additional volume mounts.
+volumeMounts: []
+# - name: extra-volume-0
+#   mountPath: /mnt/volume0
+#   readOnly: true
+# - name: extra-volume-1
+#   mountPath: /mnt/volume1
+#   readOnly: true
+#   hostPath: /usr/shared/
+
+## Additional openldap server volumes
+# Defines additional volumes.
+volumes: []
+# - name: extra-volume-0
+#   secret:
+#     secretName: mysecret
+#     optional: false # default setting; "mysecret" must exist
+# - name: extra-volume-1
+#   persistentVolumeClaim:
+#     claimName: myclaim
+
 # -- Container resource [requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#resources) for details.
 # @default -- No requests or limits.
