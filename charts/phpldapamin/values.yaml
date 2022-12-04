@@ -25,12 +25,11 @@ service:
 # https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 initContainers: []
 # - name: printenvs
-#   image: busybox
-#   tag: latest
-#   commands:
-#   - printenv
-#   - "HOSTNAME"
-#   - "KUBERNETES_PORT"
+#   image: busybox:latest
+#   command:
+#     - printenv
+#     - "HOSTNAME"
+#     - "KUBERNETES_PORT"
 
 ## Additional configmaps to mount in phpldapadmin pods
 # Values are templated.
