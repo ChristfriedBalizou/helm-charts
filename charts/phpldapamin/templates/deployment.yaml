@@ -26,7 +26,10 @@ spec:
       {{- range $k, $v := .Values.initContainers }}
       - name: {{ $v.name }}
         image: "{{ $v.image }}:{{ $v.tag }}"
-        command: {{ $v.command | mustToRawJson }}
+        command:
+        {{- with $v.commands }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       {{- end }}
       {{- end }}
       containers:
