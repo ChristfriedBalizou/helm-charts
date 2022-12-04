@@ -404,6 +404,27 @@ entries:
   phpldapadmin:
   - apiVersion: v2
     appVersion: 0.9.0
+    created: "2022-12-04T02:52:49.597950753Z"
+    description: Community developed LDAP software
+    digest: 301e3dee91f0a9fce8630ff326d0e1c6c3800ecdf6a7e47a373bcbb3443d41e5
+    home: https://phpldapadmin.sourceforge.net/wiki/index.php/Main_Page
+    icon: https://phpldapadmin.sourceforge.net/wiki/images/d/d4/Logo.jpg
+    keywords:
+    - ldap
+    - openldap
+    - phpldapadmin
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: christfriedbalizou@gmail.com
+      name: Christfried
+    name: phpldapadmin
+    sources:
+    - https://github.com/ChristfriedBalizou/helm-charts
+    urls:
+    - https://github.com/ChristfriedBalizou/helm-charts/releases/download/phpldapadmin-0.2.2/phpldapadmin-0.2.2.tgz
+    version: 0.2.2
+  - apiVersion: v2
+    appVersion: 0.9.0
     created: "2022-12-04T01:50:45.38911172Z"
     description: Community developed LDAP software
     digest: ca69931a63a3dcf964d54942f6462f4ed5cf49cd1a44ad272f31b17f03d8dd85
@@ -528,4 +549,4 @@ entries:
     urls:
     - https://github.com/ChristfriedBalizou/helm-charts/releases/download/phpldapadmin-0.0.1/phpldapadmin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-12-04T01:50:45.389446329Z"
+generated: "2022-12-04T02:52:49.59811986Z"
