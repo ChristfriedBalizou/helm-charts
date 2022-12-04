@@ -36,8 +36,14 @@ spec:
               key: LDAP_ADMIN_PASSWORD
               name: {{ template "openldap.fullname" . }}
         ports:
-        - name: tcp-ldap
-          containerPort: {{ .Values.service.port }}
+        {{- range $k, $v := .Values.service.ports }}
+        - containerPort: {{ $v.port }}
+        {{- if $v.targetPort }}
+          name: {{ $v.targetPort }}
+        {{- else }}
+          name: {{ $v.name }}-tcp
+        {{- end }}
+        {{- end }}
         {{- if .Values.resources }}
         resources:
         {{- toYaml .Values.resources | nindent 12 }}

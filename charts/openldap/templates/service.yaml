@@ -10,7 +10,13 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - name: ldap
-      port: {{ .Values.service.port }}
-      targetPort: tcp-ldap
+  {{- range $k, $v := .Values.service.ports }}
+  - port: {{ $v.port }}
+    name: {{ $v.name }}
+    {{- if $v.targetPort }}
+    targetPort: {{ $v.targetPort }}
+    {{- else }}
+    targetPort: {{ $v.name }}-tcp
+    {{- end }}
+  {{- end }}
   selector: {{ include "openldap.selectorLabels" . | nindent 4 }}

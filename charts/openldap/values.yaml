@@ -17,7 +17,11 @@ existingSecret: ""
 extraLabels: {}
 service:
   annotations: {}
-  port: 389
+  ports:
+    - name: portname1
+      port: 389
+    - name: portname2
+      port: 636
 
 ## Enable persistence using Persistent Volume Claims
 ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
