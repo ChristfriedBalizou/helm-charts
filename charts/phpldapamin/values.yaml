@@ -21,14 +21,16 @@ service:
   # https://github.com/osixia/docker-phpLDAPadmin/blob/stable/image/Dockerfile#L46
   targetPort: 80
 
-## Additional command to run in the pod
-# https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/
-# commandArgs:
+## Additional command to run in init container the pod
+# https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+initContainers: []
+# - name: printenvs
+#   image: busybox
+#   tag: latest
 #   commands:
-#     - printenv
-#   args:
-#     - "HOSTNAME"
-#     - "KUBERNETES_PORT"
+#   - printenv
+#   - "HOSTNAME"
+#   - "KUBERNETES_PORT"
 
 ## Additional configmaps to mount in phpldapadmin pods
 # Values are templated.
