@@ -1,7 +1,7 @@
 apiVersion: v2
 name: phpldapadmin
 home: https://phpldapadmin.sourceforge.net/wiki/index.php/Main_Page
-version: 0.2.1
+version: 0.2.3
 appVersion: 0.9.0
 kubeVersion: ">=1.16.0-0"
 description: Community developed LDAP software
