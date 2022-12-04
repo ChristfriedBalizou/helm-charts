@@ -25,6 +25,16 @@ spec:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{- if .Values.commandArgs }}
+        command:
+        {{- with .Values.commandArgs.commands }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        args:
+        {{- with .Values.commandArgs.args }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        {{- end }}
         env:
         {{- if .Values.env }}
         {{- range $k, $v := .Values.env }}
