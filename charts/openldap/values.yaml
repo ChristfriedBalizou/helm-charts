@@ -23,6 +23,20 @@ service:
     - name: portname2
       port: 636
 
+## Define affinity
+# https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
+#
+# affinity:
+#   podAntiAffinity:
+#     requiredDuringSchedulingIgnoredDuringExecution:
+#     - labelSelector:
+#         matchExpressions:
+#         - key: app
+#           operator: In
+#           values:
+#           - store
+#       topologyKey: "kubernetes.io/hostname"
+
 ## Enable persistence using Persistent Volume Claims
 ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
 ##
