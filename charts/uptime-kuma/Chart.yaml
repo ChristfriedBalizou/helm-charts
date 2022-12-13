@@ -1,0 +1,23 @@
+apiVersion: v2
+name: uptime-kuma
+home: https://uptime.kuma.pet/
+version: 0.0.1
+appVersion: "latest"
+kubeVersion: ">=1.16.0-0"
+description: Self-hosted monitoring tool
+icon: https://raw.githubusercontent.com/louislam/uptime-kuma/master/public/icon.svg
+keywords:
+  - monitoring
+  - uptime
+  - kuma
+maintainers:
+  - name: Christfried
+    email: christfriedbalizou@gmail.com
+sources:
+  - https://github.com/ChristfriedBalizou/helm-charts/tree/main/charts/uptime-kuma
+  - https://github.com/louislam/uptime-kuma
+dependencies:
+  - name: common
+    version: 1.2.0
+    repository: https://bjw-s.github.io/helm-charts/
+engine: gotpl
