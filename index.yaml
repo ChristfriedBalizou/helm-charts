@@ -631,4 +631,31 @@ entries:
     urls:
     - https://github.com/ChristfriedBalizou/helm-charts/releases/download/phpldapadmin-0.0.1/phpldapadmin-0.0.1.tgz
     version: 0.0.1
-generated: "2022-12-06T23:32:44.960348227Z"
+  uptime-kuma:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2022-12-14T10:25:41.372338848Z"
+    dependencies:
+    - name: common
+      repository: https://bjw-s.github.io/helm-charts/
+      version: 1.2.0
+    description: Self-hosted monitoring tool
+    digest: fe076e28c25d9279a3e593fa868d1770cb9bca3c096bb31b516c23613a29e1a0
+    home: https://uptime.kuma.pet/
+    icon: https://raw.githubusercontent.com/louislam/uptime-kuma/master/public/icon.svg
+    keywords:
+    - monitoring
+    - uptime
+    - kuma
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: christfriedbalizou@gmail.com
+      name: Christfried
+    name: uptime-kuma
+    sources:
+    - https://github.com/ChristfriedBalizou/helm-charts/tree/main/charts/uptime-kuma
+    - https://github.com/louislam/uptime-kuma
+    urls:
+    - https://github.com/ChristfriedBalizou/helm-charts/releases/download/uptime-kuma-0.0.1/uptime-kuma-0.0.1.tgz
+    version: 0.0.1
+generated: "2022-12-14T10:25:41.372561754Z"
