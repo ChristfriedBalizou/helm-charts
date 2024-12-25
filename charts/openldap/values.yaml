@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   # From repository https://github.com/bitnami/openldap
   repository: bitnami/openldap
-  tag: 2.6.3
+  tag: 2.6.9
   pullPolicy: IfNotPresent
 
 # Spcifies an existing secret to be used for admin and config user passwords
